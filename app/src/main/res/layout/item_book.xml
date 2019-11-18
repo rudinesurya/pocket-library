@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical">
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+    <TextView
+      android:id="@+id/tv_title"
+      style="@android:style/TextAppearance.DeviceDefault.Large"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentStart="true"
+      android:layout_margin="5dp"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:text="@string/sample_book_title" />
+
+    <TextView
+      android:id="@+id/tv_price"
+      style="@android:style/TextAppearance.DeviceDefault.Small"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      android:layout_marginStart="5dp"
+      android:layout_marginEnd="4dp"
+      android:text="@string/sample_book_price" />
+
+    <TextView
+      android:id="@+id/tv_author"
+      style="@android:style/TextAppearance.DeviceDefault.Medium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/tv_title"
+      android:layout_margin="5dp"
+      android:text="@string/sample_book_author" />
+
+  </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>
