@@ -18,6 +18,7 @@ public class MemoryBookDetailSource {
         .title("title#123")
         .isbn("abcd")
         .author("author#123")
+        .description("asdasdasd")
         .price(10000)
         .build();
 

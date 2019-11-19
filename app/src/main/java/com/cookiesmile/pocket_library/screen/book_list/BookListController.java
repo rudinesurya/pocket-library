@@ -3,18 +3,19 @@ package com.cookiesmile.pocket_library.screen.book_list;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cookiesmile.pocket_library.R;
 import com.cookiesmile.pocket_library.base.BaseController;
 import com.cookiesmile.pocket_library.data.model.BookListData;
+import com.cookiesmile.pocket_library.screen.book_list.utils.MyListAdapter;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import timber.log.Timber;
 
 public class BookListController extends BaseController {
 
@@ -34,6 +35,12 @@ public class BookListController extends BaseController {
   @Override
   protected int layoutRes() {
     return R.layout.screen_book_list;
+  }
+
+  @Override
+  protected void onViewBound(View view) {
+    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+    recyclerView.setAdapter(new MyListAdapter(presenter));
   }
 
   @Override
@@ -67,6 +74,6 @@ public class BookListController extends BaseController {
   }
 
   private void PopulateRecyclerView(BookListData data) {
-    Timber.d(data.toString());
+    ((MyListAdapter) recyclerView.getAdapter()).setData(data.data());
   }
 }
