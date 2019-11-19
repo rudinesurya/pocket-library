@@ -3,6 +3,7 @@ package com.cookiesmile.pocket_library.screen.book_detail;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bluelinelabs.conductor.Controller;
 import com.cookiesmile.pocket_library.R;
@@ -102,5 +103,8 @@ public class BookDetailController extends BaseController {
     isbnText.setText(bookDetail.isbn());
     descriptionText.setText(bookDetail.description());
     priceText.setText(String.valueOf(bookDetail.price()));
+
+    Toast.makeText(getApplicationContext(), "fetched from: " + data.source(), Toast.LENGTH_LONG)
+        .show();
   }
 }

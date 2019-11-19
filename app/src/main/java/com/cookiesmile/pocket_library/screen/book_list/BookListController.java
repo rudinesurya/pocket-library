@@ -2,6 +2,7 @@ package com.cookiesmile.pocket_library.screen.book_list;
 
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -75,5 +76,7 @@ public class BookListController extends BaseController {
 
   private void PopulateRecyclerView(BookListData data) {
     ((MyListAdapter) recyclerView.getAdapter()).setData(data.data());
+    Toast.makeText(getApplicationContext(), "fetched from: " + data.source(), Toast.LENGTH_LONG)
+        .show();
   }
 }
