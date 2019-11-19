@@ -12,10 +12,10 @@ import com.bluelinelabs.conductor.Conductor;
 import com.bluelinelabs.conductor.Controller;
 import com.bluelinelabs.conductor.ControllerChangeHandler;
 import com.bluelinelabs.conductor.Router;
-import com.bluelinelabs.conductor.RouterTransaction;
 import com.cookiesmile.pocket_library.R;
 import com.cookiesmile.pocket_library.di.Injector;
 import com.cookiesmile.pocket_library.di.ScreenInjector;
+import com.cookiesmile.pocket_library.navigation.ScreenNavigation;
 
 import java.util.UUID;
 
@@ -27,6 +27,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
   @Inject
   ScreenInjector screenInjector;
+  @Inject
+  ScreenNavigation screenNavigation;
 
   private String instanceId;
   private Router router;
@@ -48,9 +50,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     router = Conductor.attachRouter(this, screenContainer, savedInstanceState);
-    if (!router.hasRootController()) {
-      router.setRoot(RouterTransaction.with(initialScreen()));
-    }
+    screenNavigation.initWithRouter(router, initialScreen());
     monitorBackStack();
   }
 
@@ -62,7 +62,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
   @Override
   public void onBackPressed() {
-    if (!router.handleBack()) {
+    if (!screenNavigation.pop()) {
       super.onBackPressed();
     }
   }
@@ -79,6 +79,7 @@ public abstract class BaseActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    screenNavigation.clear();
     if (isFinishing()) {
       Injector.clearComponent(this);
     }

@@ -1,8 +1,10 @@
 package com.cookiesmile.pocket_library.screen.book_detail;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bluelinelabs.conductor.Controller;
 import com.cookiesmile.pocket_library.R;
 import com.cookiesmile.pocket_library.base.BaseController;
 import com.cookiesmile.pocket_library.data.model.BookDetail;
@@ -15,6 +17,18 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
 public class BookDetailController extends BaseController {
+
+  static final String BOOK_ID_KEY = "book_id";
+
+  public BookDetailController(Bundle bundle) {
+    super(bundle);
+  }
+
+  public static Controller newInstance(long id) {
+    Bundle bundle = new Bundle();
+    bundle.putLong(BOOK_ID_KEY, id);
+    return new BookDetailController(bundle);
+  }
 
   @Inject
   BookDetailViewModel viewModel;
