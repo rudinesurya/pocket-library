@@ -3,10 +3,10 @@ package com.cookiesmile.pocket_library.data.model;
 import com.google.auto.value.AutoValue;
 
 @AutoValue
-public abstract class Book {
+public abstract class BookDetail {
 
   public static Builder builder() {
-    return new AutoValue_Book.Builder();
+    return new AutoValue_BookDetail.Builder();
   }
 
   public abstract long id();
@@ -16,6 +16,8 @@ public abstract class Book {
   public abstract String isbn();
 
   public abstract String author();
+
+  public abstract String description();
 
   public abstract int price();
 
@@ -30,8 +32,10 @@ public abstract class Book {
 
     public abstract Builder author(String value);
 
+    public abstract Builder description(String value);
+
     public abstract Builder price(int value);
 
-    public abstract Book build();
+    public abstract BookDetail build();
   }
 }

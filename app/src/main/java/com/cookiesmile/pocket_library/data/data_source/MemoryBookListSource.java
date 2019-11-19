@@ -24,7 +24,6 @@ public class MemoryBookListSource {
           .title("title#" + i)
           .isbn("abcd")
           .author("author#" + i)
-          .description("description#" + i)
           .price(i * 100)
           .build();
 

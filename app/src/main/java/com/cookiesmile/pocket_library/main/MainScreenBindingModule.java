@@ -2,6 +2,8 @@ package com.cookiesmile.pocket_library.main;
 
 import com.bluelinelabs.conductor.Controller;
 import com.cookiesmile.pocket_library.di.ControllerKey;
+import com.cookiesmile.pocket_library.screen.book_detail.BookDetailComponent;
+import com.cookiesmile.pocket_library.screen.book_detail.BookDetailController;
 import com.cookiesmile.pocket_library.screen.book_list.BookListComponent;
 import com.cookiesmile.pocket_library.screen.book_list.BookListController;
 import com.cookiesmile.pocket_library.screen.main.MainController;
@@ -15,6 +17,7 @@ import dagger.multibindings.IntoMap;
 @Module(subcomponents = {
     MainControllerComponent.class,
     BookListComponent.class,
+    BookDetailComponent.class,
 })
 abstract class MainScreenBindingModule {
 
@@ -30,9 +33,9 @@ abstract class MainScreenBindingModule {
   abstract AndroidInjector.Factory<? extends Controller> bindBookListInjector(
       BookListComponent.Builder builder);
 
-//  @Binds
-//  @IntoMap
-//  @ControllerKey(BookDetailController.class)
-//  abstract AndroidInjector.Factory<? extends Controller> bindBookDetailInjector(
-//      BookDetailComponent.Builder builder);
+  @Binds
+  @IntoMap
+  @ControllerKey(BookDetailController.class)
+  abstract AndroidInjector.Factory<? extends Controller> bindBookDetailInjector(
+      BookDetailComponent.Builder builder);
 }
