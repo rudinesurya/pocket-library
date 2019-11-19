@@ -1,9 +1,15 @@
 package com.cookiesmile.pocket_library.data.model;
 
 import com.google.auto.value.AutoValue;
+import com.squareup.moshi.JsonAdapter;
+import com.squareup.moshi.Moshi;
 
 @AutoValue
 public abstract class Book {
+
+  public static JsonAdapter<Book> jsonAdapter(Moshi moshi) {
+    return new AutoValue_Book.MoshiJsonAdapter(moshi);
+  }
 
   public static Builder builder() {
     return new AutoValue_Book.Builder();
