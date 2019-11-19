@@ -22,7 +22,7 @@ abstract class NetworkModule {
   @Provides
   @Named("base_url")
   static String provideBaseUrl() {
-    return "http://tpbookserver.herokuapp.com/";
+    return "https://tpbookserver.herokuapp.com/";
   }
 
   @Provides

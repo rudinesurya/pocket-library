@@ -1,7 +1,7 @@
 package com.cookiesmile.pocket_library.data.data_source;
 
 import com.cookiesmile.pocket_library.data.api.BookServerApiService;
-import com.cookiesmile.pocket_library.data.model.BookDetailData;
+import com.cookiesmile.pocket_library.data.model.BookDetail;
 
 import javax.inject.Inject;
 
@@ -16,14 +16,7 @@ public class NetworkBookDetailSource {
     this.service = service;
   }
 
-  public Single<BookDetailData> getData(long id) {
-    return Single.create(emitter -> {
-      service.getBookDetail(id).doOnSuccess(book -> {
-        emitter.onSuccess(BookDetailData.builder()
-            .data(book)
-            .source("network")
-            .build());
-      });
-    });
+  public Single<BookDetail> getData(long id) {
+    return service.getBookDetail(id);
   }
 }

@@ -3,13 +3,11 @@ package com.cookiesmile.pocket_library.screen.book_detail;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bluelinelabs.conductor.Controller;
 import com.cookiesmile.pocket_library.R;
 import com.cookiesmile.pocket_library.base.BaseController;
 import com.cookiesmile.pocket_library.data.model.BookDetail;
-import com.cookiesmile.pocket_library.data.model.BookDetailData;
 
 import javax.inject.Inject;
 
@@ -65,7 +63,7 @@ public class BookDetailController extends BaseController {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(loading -> {
           loadingView.setVisibility(loading ? View.VISIBLE : View.GONE);
-          SetBookDetailVisibility(View.VISIBLE);
+          SetBookDetailVisibility(loading ? View.GONE : View.VISIBLE);
           errorText.setVisibility(loading ? View.GONE : errorText.getVisibility());
         }),
 
@@ -96,15 +94,12 @@ public class BookDetailController extends BaseController {
     priceText.setVisibility(visibility);
   }
 
-  private void FillBookDetail(BookDetailData data) {
-    BookDetail bookDetail = data.data();
+  private void FillBookDetail(BookDetail data) {
+    BookDetail bookDetail = data;
     titleText.setText(bookDetail.title());
     authorText.setText(bookDetail.author());
     isbnText.setText(bookDetail.isbn());
     descriptionText.setText(bookDetail.description());
     priceText.setText(String.valueOf(bookDetail.price()));
-
-    Toast.makeText(getApplicationContext(), "fetched from: " + data.source(), Toast.LENGTH_LONG)
-        .show();
   }
 }

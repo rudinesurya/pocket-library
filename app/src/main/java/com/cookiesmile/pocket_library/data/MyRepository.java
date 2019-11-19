@@ -2,8 +2,10 @@ package com.cookiesmile.pocket_library.data;
 
 import com.cookiesmile.pocket_library.data.data_source.BookDetailDataSource;
 import com.cookiesmile.pocket_library.data.data_source.BookListDataSource;
-import com.cookiesmile.pocket_library.data.model.BookDetailData;
-import com.cookiesmile.pocket_library.data.model.BookListData;
+import com.cookiesmile.pocket_library.data.model.Book;
+import com.cookiesmile.pocket_library.data.model.BookDetail;
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -27,11 +29,11 @@ public class MyRepository {
     this.scheduler = scheduler;
   }
 
-  public Single<BookListData> getBookList() {
+  public Single<List<Book>> getBookList() {
     return bookListDataSource.getDataFromNetwork().subscribeOn(scheduler);
   }
 
-  public Single<BookDetailData> getBookDetail(long id) {
+  public Single<BookDetail> getBookDetail(long id) {
     return bookDetailDataSource.getDataFromNetwork(id).subscribeOn(scheduler);
   }
 }

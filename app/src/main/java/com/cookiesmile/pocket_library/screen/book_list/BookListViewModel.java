@@ -1,9 +1,11 @@
 package com.cookiesmile.pocket_library.screen.book_list;
 
 import com.cookiesmile.pocket_library.R;
-import com.cookiesmile.pocket_library.data.model.BookListData;
+import com.cookiesmile.pocket_library.data.model.Book;
 import com.cookiesmile.pocket_library.di.ScreenScope;
 import com.jakewharton.rxrelay2.BehaviorRelay;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -14,7 +16,7 @@ import timber.log.Timber;
 @ScreenScope
 public class BookListViewModel {
 
-  private final BehaviorRelay<BookListData> resultRelay = BehaviorRelay.create();
+  private final BehaviorRelay<List<Book>> resultRelay = BehaviorRelay.create();
   private final BehaviorRelay<Integer> errorRelay = BehaviorRelay.create();
   private final BehaviorRelay<Boolean> loadingRelay = BehaviorRelay.create();
 
@@ -27,7 +29,7 @@ public class BookListViewModel {
     return loadingRelay;
   }
 
-  Observable<BookListData> result() {
+  Observable<List<Book>> result() {
     return resultRelay;
   }
 
@@ -39,7 +41,7 @@ public class BookListViewModel {
     return loadingRelay;
   }
 
-  Consumer<BookListData> resultUpdated() {
+  Consumer<List<Book>> resultUpdated() {
     errorRelay.accept(-1);
     return resultRelay;
   }

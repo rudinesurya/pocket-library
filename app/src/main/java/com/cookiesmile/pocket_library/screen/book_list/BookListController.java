@@ -2,15 +2,16 @@ package com.cookiesmile.pocket_library.screen.book_list;
 
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cookiesmile.pocket_library.R;
 import com.cookiesmile.pocket_library.base.BaseController;
-import com.cookiesmile.pocket_library.data.model.BookListData;
+import com.cookiesmile.pocket_library.data.model.Book;
 import com.cookiesmile.pocket_library.screen.book_list.utils.MyListAdapter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -74,9 +75,7 @@ public class BookListController extends BaseController {
     };
   }
 
-  private void PopulateRecyclerView(BookListData data) {
-    ((MyListAdapter) recyclerView.getAdapter()).setData(data.data());
-    Toast.makeText(getApplicationContext(), "fetched from: " + data.source(), Toast.LENGTH_LONG)
-        .show();
+  private void PopulateRecyclerView(List<Book> data) {
+    ((MyListAdapter) recyclerView.getAdapter()).setData(data);
   }
 }

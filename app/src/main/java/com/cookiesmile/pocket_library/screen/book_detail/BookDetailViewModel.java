@@ -1,7 +1,7 @@
 package com.cookiesmile.pocket_library.screen.book_detail;
 
 import com.cookiesmile.pocket_library.R;
-import com.cookiesmile.pocket_library.data.model.BookDetailData;
+import com.cookiesmile.pocket_library.data.model.BookDetail;
 import com.cookiesmile.pocket_library.di.ScreenScope;
 import com.jakewharton.rxrelay2.BehaviorRelay;
 
@@ -14,7 +14,7 @@ import timber.log.Timber;
 @ScreenScope
 public class BookDetailViewModel {
 
-  private final BehaviorRelay<BookDetailData> resultRelay = BehaviorRelay.create();
+  private final BehaviorRelay<BookDetail> resultRelay = BehaviorRelay.create();
   private final BehaviorRelay<Integer> errorRelay = BehaviorRelay.create();
   private final BehaviorRelay<Boolean> loadingRelay = BehaviorRelay.create();
 
@@ -27,7 +27,7 @@ public class BookDetailViewModel {
     return loadingRelay;
   }
 
-  Observable<BookDetailData> result() {
+  Observable<BookDetail> result() {
     return resultRelay;
   }
 
@@ -39,7 +39,7 @@ public class BookDetailViewModel {
     return loadingRelay;
   }
 
-  Consumer<BookDetailData> resultUpdated() {
+  Consumer<BookDetail> resultUpdated() {
     errorRelay.accept(-1);
     return resultRelay;
   }
