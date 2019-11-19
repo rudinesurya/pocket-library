@@ -28,7 +28,7 @@ public class MemoryBookDetailSource {
         .build();
   }
 
-  public Single<BookDetailData> getData() {
+  public Single<BookDetailData> getData(long id) {
     return Single.create(emitter -> {
       if (data != null) {
         emitter.onSuccess(data);

@@ -11,13 +11,21 @@ import io.reactivex.Single;
 public class BookDetailDataSource {
 
   MemoryBookDetailSource memoryBookDetailSource;
+  NetworkBookDetailSource networkBookDetailSource;
 
   @Inject
-  BookDetailDataSource(MemoryBookDetailSource memoryBookDetailSource) {
+  BookDetailDataSource(MemoryBookDetailSource memoryBookDetailSource,
+      NetworkBookDetailSource networkBookDetailSource) {
     this.memoryBookDetailSource = memoryBookDetailSource;
+    this.networkBookDetailSource = networkBookDetailSource;
   }
 
-  public Single<BookDetailData> getDataFromMemory() {
-    return memoryBookDetailSource.getData();
+  public Single<BookDetailData> getDataFromMemory(long id) {
+    return memoryBookDetailSource.getData(id);
   }
+
+  public Single<BookDetailData> getDataFromNetwork(long id) {
+    return networkBookDetailSource.getData(id);
+  }
+
 }

@@ -28,10 +28,10 @@ public class MyRepository {
   }
 
   public Single<BookListData> getBookList() {
-    return bookListDataSource.getDataFromMemory().subscribeOn(scheduler);
+    return bookListDataSource.getDataFromNetwork().subscribeOn(scheduler);
   }
 
   public Single<BookDetailData> getBookDetail(long id) {
-    return bookDetailDataSource.getDataFromMemory().subscribeOn(scheduler);
+    return bookDetailDataSource.getDataFromNetwork(id).subscribeOn(scheduler);
   }
 }
