@@ -44,6 +44,7 @@ public class BookListController extends BaseController {
 
   @Override
   protected void onViewBound(View view) {
+    toolbar.setTitle("All books collection");
     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
     recyclerView.setAdapter(new MyListAdapter(presenter));
   }

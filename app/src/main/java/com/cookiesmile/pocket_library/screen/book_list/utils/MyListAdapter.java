@@ -2,11 +2,15 @@ package com.cookiesmile.pocket_library.screen.book_list.utils;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -72,7 +76,8 @@ public class MyListAdapter extends RecyclerView.Adapter<ViewHolder> {
     void onItemClickListener(Book book);
   }
 
-  static final class ViewHolder extends RecyclerView.ViewHolder {
+  static final class ViewHolder extends RecyclerView.ViewHolder implements
+      PopupMenu.OnMenuItemClickListener {
 
     Context context;
     @BindView(R.id.tv_title)
@@ -81,6 +86,8 @@ public class MyListAdapter extends RecyclerView.Adapter<ViewHolder> {
     TextView authorText;
     @BindView(R.id.tv_price)
     TextView priceText;
+    @BindView(R.id.btn_menu)
+    ImageButton menuBtn;
 
     private Book book;
 
@@ -93,6 +100,20 @@ public class MyListAdapter extends RecyclerView.Adapter<ViewHolder> {
           listener.onItemClickListener(book);
         }
       });
+      menuBtn.setOnClickListener(v -> {
+        if (book != null) {
+          showPopupMenu(menuBtn, book);
+        }
+      });
+    }
+
+    private void showPopupMenu(View view, Book book) {
+      // inflate menu
+      PopupMenu popup = new PopupMenu(context, view);
+      MenuInflater inflater = popup.getMenuInflater();
+      inflater.inflate(R.menu.popup_menu, popup.getMenu());
+      popup.setOnMenuItemClickListener(this);
+      popup.show();
     }
 
     void bind(Book book) {
@@ -100,6 +121,18 @@ public class MyListAdapter extends RecyclerView.Adapter<ViewHolder> {
       titleText.setText(book.title());
       authorText.setText(book.author());
       priceText.setText(MyCurrencyStringBuilder.create(book.price(), book.currencyCode()));
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+      switch (item.getItemId()) {
+        case R.id.star_book:
+          return true;
+
+        case R.id.not_interested:
+          return true;
+      }
+      return false;
     }
   }
 }

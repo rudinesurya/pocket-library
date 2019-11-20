@@ -1,7 +1,6 @@
 package com.cookiesmile.pocket_library.data;
 
-import com.cookiesmile.pocket_library.data.data_source.BookDetailDataSource;
-import com.cookiesmile.pocket_library.data.data_source.BookListDataSource;
+import com.cookiesmile.pocket_library.data.api.BookServerApiService;
 import com.cookiesmile.pocket_library.data.model.Book;
 import com.cookiesmile.pocket_library.data.model.BookDetail;
 
@@ -17,23 +16,21 @@ import io.reactivex.Single;
 @Singleton
 public class MyRepository {
 
-  private final BookListDataSource bookListDataSource;
-  private final BookDetailDataSource bookDetailDataSource;
+  private final BookServerApiService service;
   private final Scheduler scheduler;
 
   @Inject
-  MyRepository(BookListDataSource bookListDataSource, BookDetailDataSource bookDetailDataSource,
+  MyRepository(BookServerApiService service,
       @Named("network_scheduler") Scheduler scheduler) {
-    this.bookListDataSource = bookListDataSource;
-    this.bookDetailDataSource = bookDetailDataSource;
+    this.service = service;
     this.scheduler = scheduler;
   }
 
   public Single<List<Book>> getBookList() {
-    return bookListDataSource.getDataFromNetwork().subscribeOn(scheduler);
+    return service.getBooks().subscribeOn(scheduler);
   }
 
   public Single<BookDetail> getBookDetail(long id) {
-    return bookDetailDataSource.getDataFromNetwork(id).subscribeOn(scheduler);
+    return service.getBookDetail(id).subscribeOn(scheduler);
   }
 }

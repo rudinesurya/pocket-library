@@ -1,10 +1,13 @@
 package com.cookiesmile.pocket_library.screen.book_detail;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar.OnMenuItemClickListener;
 
 import com.bluelinelabs.conductor.Controller;
 import com.cookiesmile.pocket_library.R;
@@ -19,7 +22,7 @@ import butterknife.BindView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
-public class BookDetailController extends BaseController {
+public class BookDetailController extends BaseController implements OnMenuItemClickListener {
 
   static final String BOOK_ID_KEY = "book_id";
 
@@ -49,6 +52,8 @@ public class BookDetailController extends BaseController {
   @BindView(R.id.tv_error)
   TextView errorText;
 
+  @BindView(R.id.layout)
+  ViewGroup layout;
   @BindView(R.id.tv_title)
   TextView titleText;
   @BindView(R.id.tv_author)
@@ -69,6 +74,9 @@ public class BookDetailController extends BaseController {
   protected void onViewBound(View view) {
     toolbar.setNavigationIcon(R.drawable.ic_back);
     toolbar.setNavigationOnClickListener(v -> screenNavigation.pop());
+
+    toolbar.inflateMenu(R.menu.popup_menu);
+    toolbar.setOnMenuItemClickListener(this);
   }
 
   @Override
@@ -78,7 +86,7 @@ public class BookDetailController extends BaseController {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(loading -> {
           loadingView.setVisibility(loading ? View.VISIBLE : View.GONE);
-          SetBookDetailVisibility(loading ? View.GONE : View.VISIBLE);
+          layout.setVisibility(loading ? View.GONE : View.VISIBLE);
           errorText.setVisibility(loading ? View.GONE : errorText.getVisibility());
         }),
 
@@ -94,28 +102,33 @@ public class BookDetailController extends BaseController {
             errorText.setVisibility(View.GONE);
           } else {
             errorText.setVisibility(View.VISIBLE);
-            SetBookDetailVisibility(View.GONE);
+            layout.setVisibility(View.GONE);
             errorText.setText(errorRes);
           }
         })
     };
   }
 
-  private void SetBookDetailVisibility(int visibility) {
-    titleText.setVisibility(visibility);
-    authorText.setVisibility(visibility);
-    isbnText.setVisibility(visibility);
-    descriptionText.setVisibility(visibility);
-    priceText.setVisibility(visibility);
-  }
-
   private void FillBookDetail(BookDetail data) {
     BookDetail bookDetail = data;
+
     titleText.setText(bookDetail.title());
     authorText.setText(bookDetail.author());
     isbnText.setText(bookDetail.isbn());
     descriptionText.setText(bookDetail.description());
     priceText
         .setText(MyCurrencyStringBuilder.create(bookDetail.price(), bookDetail.currencyCode()));
+  }
+
+  @Override
+  public boolean onMenuItemClick(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.star_book:
+        return true;
+
+      case R.id.not_interested:
+        return true;
+    }
+    return false;
   }
 }
