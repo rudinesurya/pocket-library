@@ -1,0 +1,50 @@
+[
+  {
+    "id": 100,
+    "title": "Code Complete: A Practical Handbook of Software Construction",
+    "isbn": "978-0735619678",
+    "price": 2954,
+    "currencyCode": "EUR",
+    "author": "Mike Riley"
+  },
+  {
+    "id": 200,
+    "title": "The Pragmatic Programmer",
+    "isbn": "978-0201616224",
+    "price": 3488,
+    "currencyCode": "EUR",
+    "author": "Andrew Hunt and Dave Thomas"
+  },
+  {
+    "id": 300,
+    "title": "iOS Forensic Analysis",
+    "isbn": "978-1430233428",
+    "price": 4604,
+    "currencyCode": "EUR",
+    "author": "Sean Morrisey"
+  },
+  {
+    "id": 400,
+    "title": "Ghost in the Wires: My Adventures as the World's Most Wanted Hacker",
+    "isbn": "978-0316037709",
+    "price": 1493,
+    "currencyCode": "EUR",
+    "author": "Kevin Mitnick"
+  },
+  {
+    "id": 500,
+    "title": "Handling Unexpected Errors",
+    "isbn": "978-0590353403",
+    "price": 1399,
+    "currencyCode": "GBP",
+    "author": "Charles R. Ash"
+  },
+  {
+    "id": 600,
+    "title": "Android Application Development For Dummies",
+    "isbn": "978-0470770184",
+    "price": 1979,
+    "currencyCode": "USD",
+    "author": "Donn Felker"
+  }
+]
