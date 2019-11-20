@@ -7,4 +7,5 @@
   <string name="sample_book_price">$ 2954</string>
   <string name="api_error_fetch_books">Error fetching book list data</string>
   <string name="api_error_fetch_book">Error fetching book data</string>
+  <string name="error_fetch_books">Error fetching books data</string>
 </resources>

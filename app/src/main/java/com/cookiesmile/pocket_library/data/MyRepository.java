@@ -4,6 +4,7 @@ import com.cookiesmile.pocket_library.data.api.BookServerApiService;
 import com.cookiesmile.pocket_library.data.model.Book;
 import com.cookiesmile.pocket_library.data.model.BookDetail;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -32,5 +33,21 @@ public class MyRepository {
 
   public Single<BookDetail> getBookDetail(long id) {
     return service.getBookDetail(id).subscribeOn(scheduler);
+  }
+
+  public Single<List<Book>> getStarredBookList() {
+    return Single.create(emitter -> {
+      List<Book> dummy = new ArrayList<>();
+      dummy.add(Book.builder()
+          .id(100)
+          .title("My Fav Book")
+          .author("John")
+          .isbn("123123")
+          .price(123)
+          .currencyCode("EUR")
+          .build());
+
+      emitter.onSuccess(dummy);
+    });
   }
 }

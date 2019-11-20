@@ -86,7 +86,7 @@ public class BookDetailController extends BaseController implements OnMenuItemCl
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(loading -> {
           loadingView.setVisibility(loading ? View.VISIBLE : View.GONE);
-          layout.setVisibility(loading ? View.GONE : View.VISIBLE);
+          layout.setVisibility(View.GONE);
           errorText.setVisibility(loading ? View.GONE : errorText.getVisibility());
         }),
 
@@ -110,6 +110,8 @@ public class BookDetailController extends BaseController implements OnMenuItemCl
   }
 
   private void FillBookDetail(BookDetail data) {
+    layout.setVisibility(View.VISIBLE);
+
     BookDetail bookDetail = data;
 
     titleText.setText(bookDetail.title());
