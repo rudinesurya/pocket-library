@@ -4,10 +4,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.bluelinelabs.conductor.Controller;
 import com.cookiesmile.pocket_library.R;
 import com.cookiesmile.pocket_library.base.BaseController;
 import com.cookiesmile.pocket_library.data.model.BookDetail;
+import com.cookiesmile.pocket_library.data.utils.MyCurrencyStringBuilder;
+import com.cookiesmile.pocket_library.navigation.ScreenNavigation;
 
 import javax.inject.Inject;
 
@@ -18,6 +22,9 @@ import io.reactivex.disposables.Disposable;
 public class BookDetailController extends BaseController {
 
   static final String BOOK_ID_KEY = "book_id";
+
+  @Inject
+  ScreenNavigation screenNavigation;
 
   public BookDetailController(Bundle bundle) {
     super(bundle);
@@ -35,6 +42,8 @@ public class BookDetailController extends BaseController {
   @Inject
   BookDetailPresenter presenter;
 
+  @BindView(R.id.toolbar)
+  Toolbar toolbar;
   @BindView(R.id.loading_indicator)
   View loadingView;
   @BindView(R.id.tv_error)
@@ -54,6 +63,12 @@ public class BookDetailController extends BaseController {
   @Override
   protected int layoutRes() {
     return R.layout.screen_book_detail;
+  }
+
+  @Override
+  protected void onViewBound(View view) {
+    toolbar.setNavigationIcon(R.drawable.ic_back);
+    toolbar.setNavigationOnClickListener(v -> screenNavigation.pop());
   }
 
   @Override
@@ -100,6 +115,7 @@ public class BookDetailController extends BaseController {
     authorText.setText(bookDetail.author());
     isbnText.setText(bookDetail.isbn());
     descriptionText.setText(bookDetail.description());
-    priceText.setText(String.valueOf(bookDetail.price()));
+    priceText
+        .setText(MyCurrencyStringBuilder.create(bookDetail.price(), bookDetail.currencyCode()));
   }
 }

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import androidx.annotation.Nullable;
+
 import java.io.File;
 
 import javax.inject.Named;
@@ -37,6 +39,7 @@ abstract class NetworkModule {
 
   @Provides
   @Singleton
+  @Nullable
   static NetworkInfo provideNetworkInfo(ConnectivityManager connectivityManager) {
     return connectivityManager.getActiveNetworkInfo();
   }
@@ -78,11 +81,11 @@ abstract class NetworkModule {
   @Provides
   @Named("offline_interceptor")
   @Singleton
-  static Interceptor provideOfflineInterceptor(NetworkInfo networkInfo) {
+  static Interceptor provideOfflineInterceptor(@Nullable NetworkInfo networkInfo) {
     return chain -> {
       Timber.d("offline interceptor: called.");
 
-      String cacheHeaderValue = networkInfo.isConnected()
+      String cacheHeaderValue = networkInfo != null && networkInfo.isConnected()
           ? "public, max-age=6000"
           : "public, only-if-cached, max-stale=6000";
 
@@ -100,11 +103,11 @@ abstract class NetworkModule {
   @Provides
   @Named("network_interceptor")
   @Singleton
-  static Interceptor provideNetworkInterceptor(NetworkInfo networkInfo) {
+  static Interceptor provideNetworkInterceptor(@Nullable NetworkInfo networkInfo) {
     return chain -> {
       Timber.d("network interceptor: called.");
 
-      String cacheHeaderValue = networkInfo.isConnected()
+      String cacheHeaderValue = networkInfo != null && networkInfo.isConnected()
           ? "public, max-age=6000"
           : "public, only-if-cached, max-stale=6000";
 
@@ -123,7 +126,7 @@ abstract class NetworkModule {
   @Provides
   @Named("cache_size")
   static long provideCacheSize() {
-    return 5 * 1024 * 1024; // 5MB
+    return 20 * 1024 * 1024; // 20MB
   }
 
   @Provides

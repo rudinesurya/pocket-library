@@ -3,6 +3,7 @@ package com.cookiesmile.pocket_library.screen.book_list;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +28,8 @@ public class BookListController extends BaseController {
   @Inject
   BookListPresenter presenter;
 
+  @BindView(R.id.toolbar)
+  Toolbar toolbar;
   @BindView(R.id.loading_indicator)
   View loadingView;
   @BindView(R.id.tv_error)

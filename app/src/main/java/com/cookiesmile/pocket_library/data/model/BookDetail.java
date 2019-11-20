@@ -27,6 +27,8 @@ public abstract class BookDetail {
 
   public abstract int price();
 
+  public abstract String currencyCode();
+
   @AutoValue.Builder
   public abstract static class Builder {
 
@@ -41,6 +43,8 @@ public abstract class BookDetail {
     public abstract Builder description(String value);
 
     public abstract Builder price(int value);
+
+    public abstract Builder currencyCode(String value);
 
     public abstract BookDetail build();
   }

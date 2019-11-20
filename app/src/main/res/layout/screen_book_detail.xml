@@ -1,68 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
-  <ProgressBar
-    android:id="@+id/loading_indicator"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:indeterminate="true"
-    android:visibility="gone" />
+  <include layout="@layout/app_bar" />
 
-  <TextView
-    android:id="@+id/tv_error"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:visibility="gone" />
-
-  <LinearLayout
+  <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-    <TextView
-      android:id="@+id/tv_title"
-      style="@android:style/TextAppearance.DeviceDefault.Medium"
+    <ProgressBar
+      android:id="@+id/loading_indicator"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_margin="10dp"
-      android:text="@string/sample_book_title" />
+      android:layout_gravity="center"
+      android:indeterminate="true"
+      android:visibility="gone" />
 
     <TextView
-      android:id="@+id/tv_author"
-      style="@android:style/TextAppearance.DeviceDefault.Medium"
+      android:id="@+id/tv_error"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_margin="10dp"
-      android:text="@string/sample_book_author" />
+      android:layout_gravity="center"
+      android:visibility="gone" />
 
-    <TextView
-      android:id="@+id/tv_isbn"
-      style="@android:style/TextAppearance.DeviceDefault.Medium"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_margin="10dp"
-      android:text="@string/sample_book_isbn" />
+    <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
 
-    <TextView
-      android:id="@+id/tv_description"
-      style="@android:style/TextAppearance.DeviceDefault.Medium"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_margin="10dp"
-      android:text="@string/sample_book_description" />
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-      android:id="@+id/tv_price"
-      style="@android:style/TextAppearance.DeviceDefault.Medium"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_margin="10dp"
-      android:text="@string/sample_book_price" />
+        <TextView
+          android:id="@+id/tv_title"
+          style="@android:style/TextAppearance.DeviceDefault.Medium"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="10dp"
+          android:text="@string/sample_book_title" />
 
-  </LinearLayout>
-</FrameLayout>
+        <TextView
+          android:id="@+id/tv_author"
+          style="@android:style/TextAppearance.DeviceDefault.Medium"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="10dp"
+          android:text="@string/sample_book_author" />
+
+        <TextView
+          android:id="@+id/tv_isbn"
+          style="@android:style/TextAppearance.DeviceDefault.Medium"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="10dp"
+          android:text="@string/sample_book_isbn" />
+
+        <TextView
+          android:id="@+id/tv_description"
+          style="@android:style/TextAppearance.DeviceDefault.Medium"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="10dp"
+          android:text="@string/sample_book_description" />
+
+        <TextView
+          android:id="@+id/tv_price"
+          style="@android:style/TextAppearance.DeviceDefault.Medium"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="10dp"
+          android:text="@string/sample_book_price" />
+
+      </LinearLayout>
+    </ScrollView>
+  </FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cookiesmile.pocket_library.R;
 import com.cookiesmile.pocket_library.data.model.Book;
+import com.cookiesmile.pocket_library.data.utils.MyCurrencyStringBuilder;
 import com.cookiesmile.pocket_library.screen.book_list.utils.MyListAdapter.ViewHolder;
 
 import java.util.ArrayList;
@@ -98,7 +99,7 @@ public class MyListAdapter extends RecyclerView.Adapter<ViewHolder> {
       this.book = book;
       titleText.setText(book.title());
       authorText.setText(book.author());
-      priceText.setText(String.valueOf(book.price()));
+      priceText.setText(MyCurrencyStringBuilder.create(book.price(), book.currencyCode()));
     }
   }
 }
