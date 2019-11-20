@@ -25,6 +25,11 @@ Currently, this project covers the following topics:
 
 
 ## Architecture
-The tech stack has been developed using MVVM in mind with Repository layer pattern. This architectural pattern allows separating the user interface logic from the business logic.
+The tech stack has been developed using MVVM in mind with Repository layer pattern. This architectural pattern allows separating the user interface logic from the business logic. Another benefit of using ViewModel is that it will persist data during device configuration change.
 
 <img src="https://s3.ap-south-1.amazonaws.com/mindorks-server-uploads/mvvm.png" width="400"> 
+
+## Network caching
+Enables networking caching by using network interceptor so that the app can display recently updated data more quickly and without consuming more bandwidth. This also enables the app to function even when offline!
+
+<img src="https://i.stack.imgur.com/XbPfJ.png" width="400"> 
