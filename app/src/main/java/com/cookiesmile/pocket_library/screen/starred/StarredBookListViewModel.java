@@ -1,7 +1,7 @@
 package com.cookiesmile.pocket_library.screen.starred;
 
 import com.cookiesmile.pocket_library.R;
-import com.cookiesmile.pocket_library.data.model.Book;
+import com.cookiesmile.pocket_library.data.database.StarredBook;
 import com.cookiesmile.pocket_library.di.ScreenScope;
 import com.jakewharton.rxrelay2.BehaviorRelay;
 
@@ -16,7 +16,7 @@ import timber.log.Timber;
 @ScreenScope
 public class StarredBookListViewModel {
 
-  private final BehaviorRelay<List<Book>> resultRelay = BehaviorRelay.create();
+  private final BehaviorRelay<List<StarredBook>> resultRelay = BehaviorRelay.create();
   private final BehaviorRelay<Integer> errorRelay = BehaviorRelay.create();
   private final BehaviorRelay<Boolean> loadingRelay = BehaviorRelay.create();
 
@@ -29,7 +29,7 @@ public class StarredBookListViewModel {
     return loadingRelay;
   }
 
-  Observable<List<Book>> result() {
+  Observable<List<StarredBook>> result() {
     return resultRelay;
   }
 
@@ -41,7 +41,7 @@ public class StarredBookListViewModel {
     return loadingRelay;
   }
 
-  Consumer<List<Book>> resultUpdated() {
+  Consumer<List<StarredBook>> resultUpdated() {
     errorRelay.accept(-1);
     return resultRelay;
   }

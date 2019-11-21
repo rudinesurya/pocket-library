@@ -1,13 +1,11 @@
 package com.cookiesmile.pocket_library.screen.book_detail;
 
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
-import androidx.appcompat.widget.Toolbar.OnMenuItemClickListener;
 
 import com.bluelinelabs.conductor.Controller;
 import com.cookiesmile.pocket_library.R;
@@ -22,7 +20,7 @@ import butterknife.BindView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
-public class BookDetailController extends BaseController implements OnMenuItemClickListener {
+public class BookDetailController extends BaseController {
 
   static final String BOOK_ID_KEY = "book_id";
 
@@ -76,7 +74,7 @@ public class BookDetailController extends BaseController implements OnMenuItemCl
     toolbar.setNavigationOnClickListener(v -> screenNavigation.pop());
 
     toolbar.inflateMenu(R.menu.popup_menu);
-    toolbar.setOnMenuItemClickListener(this);
+    toolbar.setOnMenuItemClickListener(presenter);
   }
 
   @Override
@@ -120,17 +118,5 @@ public class BookDetailController extends BaseController implements OnMenuItemCl
     descriptionText.setText(bookDetail.description());
     priceText
         .setText(MyCurrencyStringBuilder.create(bookDetail.price(), bookDetail.currencyCode()));
-  }
-
-  @Override
-  public boolean onMenuItemClick(MenuItem item) {
-    switch (item.getItemId()) {
-      case R.id.star_book:
-        return true;
-
-      case R.id.not_interested:
-        return true;
-    }
-    return false;
   }
 }

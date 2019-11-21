@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cookiesmile.pocket_library.R;
 import com.cookiesmile.pocket_library.base.BaseController;
-import com.cookiesmile.pocket_library.data.model.Book;
+import com.cookiesmile.pocket_library.data.database.StarredBook;
 import com.cookiesmile.pocket_library.navigation.ScreenNavigation;
 import com.cookiesmile.pocket_library.screen.book_list.utils.MyListAdapter;
 
@@ -20,6 +20,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import timber.log.Timber;
 
 public class StarredBookListController extends BaseController {
 
@@ -84,8 +85,9 @@ public class StarredBookListController extends BaseController {
     };
   }
 
-  private void PopulateRecyclerView(List<Book> data) {
+  private void PopulateRecyclerView(List<StarredBook> data) {
     recyclerView.setVisibility(View.VISIBLE);
-    ((MyListAdapter) recyclerView.getAdapter()).setData(data);
+    Timber.d(data.toString());
+//    ((MyListAdapter) recyclerView.getAdapter()).setData(data);
   }
 }

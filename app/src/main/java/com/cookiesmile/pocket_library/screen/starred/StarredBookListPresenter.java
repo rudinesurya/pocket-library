@@ -11,21 +11,33 @@ import javax.inject.Inject;
 @ScreenScope
 public class StarredBookListPresenter implements MyListAdapter.ItemClickListener {
 
+  private final MyRepository repository;
   private final ScreenNavigation screenNavigation;
 
   @Inject
   StarredBookListPresenter(StarredBookListViewModel viewModel, MyRepository repository,
       ScreenNavigation screenNavigation) {
+    this.repository = repository;
     this.screenNavigation = screenNavigation;
 
     repository.getStarredBookList()
         .doOnSubscribe(__ -> viewModel.loadingUpdated().accept(true))
-        .doOnEvent((d, t) -> viewModel.loadingUpdated().accept(false))
+        .doOnEach(__ -> viewModel.loadingUpdated().accept(false))
         .subscribe(viewModel.resultUpdated(), viewModel.onError());
   }
 
   @Override
   public void onItemClickListener(Book book) {
     screenNavigation.goToBookDetail(book.id());
+  }
+
+  @Override
+  public void onStarItemClickListener(Book book) {
+    repository.addStarredBook(book);
+  }
+
+  @Override
+  public void onUnStarItemClickListener(Book book) {
+    repository.deleteStarredBook(book);
   }
 }
