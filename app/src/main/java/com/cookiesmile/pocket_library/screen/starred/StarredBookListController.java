@@ -1,6 +1,7 @@
 package com.cookiesmile.pocket_library.screen.starred;
 
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
@@ -9,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cookiesmile.pocket_library.R;
 import com.cookiesmile.pocket_library.base.BaseController;
-import com.cookiesmile.pocket_library.data.database.StarredBook;
+import com.cookiesmile.pocket_library.data.model.Book;
 import com.cookiesmile.pocket_library.navigation.ScreenNavigation;
 import com.cookiesmile.pocket_library.screen.book_list.utils.MyListAdapter;
 
@@ -20,7 +21,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import timber.log.Timber;
 
 public class StarredBookListController extends BaseController {
 
@@ -39,6 +39,8 @@ public class StarredBookListController extends BaseController {
   TextView errorText;
   @BindView(R.id.recycler_view)
   RecyclerView recyclerView;
+  @BindView(R.id.tv_empty_splash)
+  ViewGroup emptySplash;
 
   @Override
   protected int layoutRes() {
@@ -63,12 +65,22 @@ public class StarredBookListController extends BaseController {
             .subscribe(loading -> {
           loadingView.setVisibility(loading ? View.VISIBLE : View.GONE);
           recyclerView.setVisibility(View.GONE);
+          emptySplash.setVisibility(View.GONE);
           errorText.setVisibility(loading ? View.GONE : errorText.getVisibility());
         }),
 
         viewModel.result()
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(this::PopulateRecyclerView),
+            .subscribe(data -> {
+          if (data.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            emptySplash.setVisibility(View.VISIBLE);
+          } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptySplash.setVisibility(View.GONE);
+            PopulateRecyclerView(data);
+          }
+        }),
 
         viewModel.error()
             .observeOn(AndroidSchedulers.mainThread())
@@ -79,15 +91,14 @@ public class StarredBookListController extends BaseController {
           } else {
             errorText.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
+            emptySplash.setVisibility(View.GONE);
             errorText.setText(errorRes);
           }
         })
     };
   }
 
-  private void PopulateRecyclerView(List<StarredBook> data) {
-    recyclerView.setVisibility(View.VISIBLE);
-    Timber.d(data.toString());
-//    ((MyListAdapter) recyclerView.getAdapter()).setData(data);
+  private void PopulateRecyclerView(List<Book> data) {
+    ((MyListAdapter) recyclerView.getAdapter()).setData(data);
   }
 }
