@@ -1,4 +1,4 @@
-package com.cookiesmile.pocket_library.screen.book_list.utils;
+package com.cookiesmile.pocket_library.screen.utils;
 
 import androidx.recyclerview.widget.DiffUtil;
 

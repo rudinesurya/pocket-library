@@ -4,7 +4,7 @@ import com.cookiesmile.pocket_library.data.MyRepository;
 import com.cookiesmile.pocket_library.data.model.Book;
 import com.cookiesmile.pocket_library.di.ScreenScope;
 import com.cookiesmile.pocket_library.navigation.ScreenNavigation;
-import com.cookiesmile.pocket_library.screen.book_list.utils.MyListAdapter;
+import com.cookiesmile.pocket_library.screen.utils.MyListAdapter;
 
 import javax.inject.Inject;
 

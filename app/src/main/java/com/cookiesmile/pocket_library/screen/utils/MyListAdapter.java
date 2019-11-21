@@ -1,4 +1,4 @@
-package com.cookiesmile.pocket_library.screen.book_list.utils;
+package com.cookiesmile.pocket_library.screen.utils;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cookiesmile.pocket_library.R;
 import com.cookiesmile.pocket_library.data.model.Book;
 import com.cookiesmile.pocket_library.data.utils.MyCurrencyStringBuilder;
-import com.cookiesmile.pocket_library.screen.book_list.utils.MyListAdapter.ViewHolder;
+import com.cookiesmile.pocket_library.screen.utils.MyListAdapter.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
