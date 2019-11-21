@@ -1,6 +1,7 @@
 package com.cookiesmile.pocket_library.screen.starred;
 
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
@@ -38,6 +39,8 @@ public class StarredBookListController extends BaseController {
   TextView errorText;
   @BindView(R.id.recycler_view)
   RecyclerView recyclerView;
+  @BindView(R.id.tv_empty_splash)
+  ViewGroup emptySplash;
 
   @Override
   protected int layoutRes() {
@@ -62,12 +65,22 @@ public class StarredBookListController extends BaseController {
             .subscribe(loading -> {
           loadingView.setVisibility(loading ? View.VISIBLE : View.GONE);
           recyclerView.setVisibility(View.GONE);
+          emptySplash.setVisibility(View.GONE);
           errorText.setVisibility(loading ? View.GONE : errorText.getVisibility());
         }),
 
         viewModel.result()
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(this::PopulateRecyclerView),
+            .subscribe(data -> {
+          if (data.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            emptySplash.setVisibility(View.VISIBLE);
+          } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptySplash.setVisibility(View.GONE);
+            PopulateRecyclerView(data);
+          }
+        }),
 
         viewModel.error()
             .observeOn(AndroidSchedulers.mainThread())
@@ -78,6 +91,7 @@ public class StarredBookListController extends BaseController {
           } else {
             errorText.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
+            emptySplash.setVisibility(View.GONE);
             errorText.setText(errorRes);
           }
         })
@@ -85,7 +99,6 @@ public class StarredBookListController extends BaseController {
   }
 
   private void PopulateRecyclerView(List<Book> data) {
-    recyclerView.setVisibility(View.VISIBLE);
     ((MyListAdapter) recyclerView.getAdapter()).setData(data);
   }
 }

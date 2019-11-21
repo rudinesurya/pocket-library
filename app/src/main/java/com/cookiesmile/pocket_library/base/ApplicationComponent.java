@@ -2,6 +2,7 @@ package com.cookiesmile.pocket_library.base;
 
 
 import com.cookiesmile.pocket_library.data.api.BookServerApiServiceModule;
+import com.cookiesmile.pocket_library.data.database.DatabaseModule;
 import com.cookiesmile.pocket_library.data.networking.ServiceModule;
 
 import javax.inject.Singleton;
@@ -14,6 +15,7 @@ import dagger.Component;
     ActivityBindingModule.class,
     ServiceModule.class,
     BookServerApiServiceModule.class,
+    DatabaseModule.class,
 })
 public interface ApplicationComponent {
 

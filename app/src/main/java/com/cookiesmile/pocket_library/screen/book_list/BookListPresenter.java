@@ -11,11 +11,13 @@ import javax.inject.Inject;
 @ScreenScope
 public class BookListPresenter implements MyListAdapter.ItemClickListener {
 
+  private final MyRepository repository;
   private final ScreenNavigation screenNavigation;
 
   @Inject
   BookListPresenter(BookListViewModel viewModel, MyRepository repository,
       ScreenNavigation screenNavigation) {
+    this.repository = repository;
     this.screenNavigation = screenNavigation;
 
     repository.getBookList()
@@ -27,5 +29,15 @@ public class BookListPresenter implements MyListAdapter.ItemClickListener {
   @Override
   public void onItemClickListener(Book book) {
     screenNavigation.goToBookDetail(book.id());
+  }
+
+  @Override
+  public void onStarItemClickListener(Book book) {
+    repository.addStarredBook(book);
+  }
+
+  @Override
+  public void onUnStarItemClickListener(Book book) {
+    repository.deleteStarredBook(book);
   }
 }

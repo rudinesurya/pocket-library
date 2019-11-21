@@ -74,6 +74,10 @@ public class MyListAdapter extends RecyclerView.Adapter<ViewHolder> {
   public interface ItemClickListener {
 
     void onItemClickListener(Book book);
+
+    void onStarItemClickListener(Book book);
+
+    void onUnStarItemClickListener(Book book);
   }
 
   static final class ViewHolder extends RecyclerView.ViewHolder implements
@@ -90,10 +94,12 @@ public class MyListAdapter extends RecyclerView.Adapter<ViewHolder> {
     ImageButton menuBtn;
 
     private Book book;
+    private ItemClickListener listener;
 
     ViewHolder(@NonNull View itemView, ItemClickListener listener) {
       super(itemView);
       context = itemView.getContext();
+      this.listener = listener;
       ButterKnife.bind(this, itemView);
       itemView.setOnClickListener(v -> {
         if (book != null) {
@@ -127,9 +133,11 @@ public class MyListAdapter extends RecyclerView.Adapter<ViewHolder> {
     public boolean onMenuItemClick(MenuItem item) {
       switch (item.getItemId()) {
         case R.id.star_book:
+          listener.onStarItemClickListener(book);
           return true;
 
         case R.id.not_interested:
+          listener.onUnStarItemClickListener(book);
           return true;
       }
       return false;
