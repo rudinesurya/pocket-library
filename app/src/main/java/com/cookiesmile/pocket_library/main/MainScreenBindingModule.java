@@ -6,6 +6,8 @@ import com.cookiesmile.pocket_library.screen.book_detail.BookDetailComponent;
 import com.cookiesmile.pocket_library.screen.book_detail.BookDetailController;
 import com.cookiesmile.pocket_library.screen.book_list.BookListComponent;
 import com.cookiesmile.pocket_library.screen.book_list.BookListController;
+import com.cookiesmile.pocket_library.screen.settings.SettingsComponent;
+import com.cookiesmile.pocket_library.screen.settings.SettingsController;
 import com.cookiesmile.pocket_library.screen.starred.StarredBookListComponent;
 import com.cookiesmile.pocket_library.screen.starred.StarredBookListController;
 
@@ -18,6 +20,7 @@ import dagger.multibindings.IntoMap;
     BookListComponent.class,
     StarredBookListComponent.class,
     BookDetailComponent.class,
+    SettingsComponent.class,
 })
 abstract class MainScreenBindingModule {
 
@@ -38,4 +41,10 @@ abstract class MainScreenBindingModule {
   @ControllerKey(BookDetailController.class)
   abstract AndroidInjector.Factory<? extends Controller> bindBookDetailInjector(
       BookDetailComponent.Builder builder);
+
+  @Binds
+  @IntoMap
+  @ControllerKey(SettingsController.class)
+  abstract AndroidInjector.Factory<? extends Controller> bindSettingsInjector(
+      SettingsComponent.Builder builder);
 }

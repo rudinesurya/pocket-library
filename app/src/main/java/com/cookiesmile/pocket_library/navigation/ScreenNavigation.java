@@ -6,6 +6,7 @@ import com.bluelinelabs.conductor.RouterTransaction;
 import com.bluelinelabs.conductor.changehandler.FadeChangeHandler;
 import com.cookiesmile.pocket_library.di.ActivityScope;
 import com.cookiesmile.pocket_library.screen.book_detail.BookDetailController;
+import com.cookiesmile.pocket_library.screen.settings.SettingsController;
 import com.cookiesmile.pocket_library.screen.starred.StarredBookListController;
 
 import javax.inject.Inject;
@@ -44,6 +45,15 @@ public class ScreenNavigation {
     if (router != null) {
       router.pushController(RouterTransaction.with(
           new StarredBookListController())
+          .pushChangeHandler(new FadeChangeHandler())
+          .popChangeHandler(new FadeChangeHandler()));
+    }
+  }
+
+  public void goToSettings() {
+    if (router != null) {
+      router.pushController(RouterTransaction.with(
+          new SettingsController())
           .pushChangeHandler(new FadeChangeHandler())
           .popChangeHandler(new FadeChangeHandler()));
     }

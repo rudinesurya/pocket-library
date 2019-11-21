@@ -99,6 +99,7 @@ public class BookListController extends BaseController implements OnMenuItemClic
         return true;
 
       case R.id.settings:
+        screenNavigation.goToSettings();
         return true;
     }
     return false;
