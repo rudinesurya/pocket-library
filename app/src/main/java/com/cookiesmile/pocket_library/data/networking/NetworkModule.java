@@ -68,12 +68,7 @@ abstract class NetworkModule {
   @Singleton
   static HttpLoggingInterceptor provideHttpLoggingInterceptor() {
     HttpLoggingInterceptor httpLoggingInterceptor =
-        new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-          @Override
-          public void log(String message) {
-            Timber.d("http log: " + message);
-          }
-        });
+        new HttpLoggingInterceptor(message -> Timber.d("http log: " + message));
     httpLoggingInterceptor.level(Level.BASIC);
     return httpLoggingInterceptor;
   }
@@ -86,8 +81,8 @@ abstract class NetworkModule {
       Timber.d("offline interceptor: called.");
 
       String cacheHeaderValue = networkInfo != null && networkInfo.isConnected()
-          ? "public, max-age=6000"
-          : "public, only-if-cached, max-stale=6000";
+          ? "public, max-age=600"
+          : "public, only-if-cached, max-stale=600";
 
       Request request = chain.request();
       Response response = chain.proceed(request);
@@ -108,8 +103,8 @@ abstract class NetworkModule {
       Timber.d("network interceptor: called.");
 
       String cacheHeaderValue = networkInfo != null && networkInfo.isConnected()
-          ? "public, max-age=6000"
-          : "public, only-if-cached, max-stale=6000";
+          ? "public, max-age=600"
+          : "public, only-if-cached, max-stale=600";
 
       Request originalRequest = chain.request();
       Request request = originalRequest.newBuilder().build();
